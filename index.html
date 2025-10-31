@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Walmart AI Static Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <div class="frame">
+    <img class="mock" src="/img/walmart_mock_.png" alt="Walmart homepage mock" />
+  </div>
+
+  <div class="cta-wrap">
+    <button id="openAssistant" class="cta" type="button" aria-haspopup="dialog" aria-controls="assistantOverlay">
+      <span class="spark" aria-hidden="true"></span>
+      <span>Talk to Walmart Assistant</span>
+    </button>
+  </div>
+
+  <!-- Overlay that keeps Walmart visible and loads your existing VoxTalk app -->
+  <div id="assistantOverlay" class="overlay" role="dialog" aria-modal="true" aria-label="Walmart Assistant">
+    <div class="sheet">
+      <div class="sheet-head">
+        <span class="spark" aria-hidden="true"></span>
+        <span>Walmart Assistant (Beta)</span>
+      </div>
+      <div class="sheet-body">
+        <!-- IMPORTANT: this points to your existing VoxTalk app URL -->
+        <iframe id="assistantFrame" src="https://walsmart-demo-1.onrender.com/" allow="microphone"></iframe>
+      </div>
+    </div>
+    <div class="hint">Click outside or press Esc to close</div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById('assistantOverlay');
+    const openBtn = document.getElementById('openAssistant');
+
+    // Open the overlay (VoxTalk loads inside iframe)
+    openBtn.addEventListener('click', () => { overlay.style.display = 'flex'; });
+
+    // Click outside to close
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.style.display = 'none'; });
+
+    // ESC to close
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') overlay.style.display = 'none'; });
+  </script>
+</body>
+</html>
